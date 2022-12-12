@@ -38,9 +38,4 @@ public class ErrorResponse {
         private final int status;
         private final Map<String, String> errorMap;
     }
-
-    @Override
-    public String toString() {
-        return "{\n\t\"status\": $status,\n\t\"message\": \"$message\"\n}";
-    }
 }
