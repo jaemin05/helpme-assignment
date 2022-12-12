@@ -1,7 +1,10 @@
 package com.example.helpmeassignment.domain.use.service;
 
+import com.example.helpmeassignment.domain.admin.facade.AdminFacade;
+import com.example.helpmeassignment.domain.deposit.presentation.dto.request.SaveDepositRequest;
 import com.example.helpmeassignment.domain.deposit.presentation.dto.response.TotalDepositAmountResponse;
 import com.example.helpmeassignment.domain.deposit.service.QueryTotalDepositAmountService;
+import com.example.helpmeassignment.domain.deposit.service.SaveDepositService;
 import com.example.helpmeassignment.domain.use.domain.Use;
 import com.example.helpmeassignment.domain.use.domain.repository.UseRepository;
 import com.example.helpmeassignment.domain.use.exception.IsTooBigUseAmountException;
@@ -16,6 +19,8 @@ public class SaveUseService {
 
     private final UseRepository useRepository;
     private final QueryTotalDepositAmountService queryTotalDepositAmountService;
+    private final SaveDepositService saveDepositService;
+    private final AdminFacade adminFacade;
 
     @Transactional
     public void execute(SaveUseRequest request) {
@@ -24,6 +29,14 @@ public class SaveUseService {
         if (request.getUseAmount() > response.getTotalDepositAmount()) {
             throw IsTooBigUseAmountException.EXCEPTION;
         }
+
+        Integer memberId = 1;
+        Integer useAmount = request.getUseAmount() * -1;
+
+        SaveDepositRequest depositRequest =
+                new SaveDepositRequest(memberId, useAmount);
+
+        saveDepositService.execute(depositRequest);
 
         useRepository.save(
                 Use.builder()

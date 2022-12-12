@@ -1,11 +1,13 @@
 package com.example.helpmeassignment.domain.deposit.presentation.dto.request;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class SaveDepositRequest {
 
     @NotNull(message = "memberId는 필수 입력입니다.")
