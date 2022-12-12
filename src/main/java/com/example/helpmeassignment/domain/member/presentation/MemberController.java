@@ -23,6 +23,7 @@ public class MemberController {
         registerMemberService.execute(request);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PostMapping("/{member-id}")
     public void loginAdmin(@PathVariable(name = "member-id") Integer memberId, @RequestBody @Valid UpdateMemberRequest request) {
         updateMemberService.execute(memberId, request);
