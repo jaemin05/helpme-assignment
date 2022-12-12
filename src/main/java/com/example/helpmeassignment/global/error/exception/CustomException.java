@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class CustomException extends RuntimeException {
+public abstract class CustomException extends RuntimeException {
     private final ErrorProperty errorProperty;
 
     @Override
