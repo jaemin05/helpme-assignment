@@ -56,6 +56,11 @@ dependencies {
     //jdk
     implementation "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2"
     implementation "org.glassfish.jaxb:jaxb-runtime:2.3.2"
+
+    // xls
+    implementation 'org.apache.poi:poi:5.2.2'
+    // xlsx
+    implementation 'org.apache.poi:poi-ooxml:5.2.2'
 }
 
 tasks.named('test') {
