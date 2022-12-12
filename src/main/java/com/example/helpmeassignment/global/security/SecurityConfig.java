@@ -2,6 +2,7 @@ package com.example.helpmeassignment.global.security;
 
 import com.example.helpmeassignment.global.security.jwt.JwtTokenFilter;
 import com.example.helpmeassignment.global.security.jwt.JwtTokenParser;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final JwtTokenParser jwtTokenParser;
+    private final ObjectMapper objectMapper;
 
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -48,10 +50,17 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/use").authenticated()
                 .requestMatchers(HttpMethod.GET, "/use/time").authenticated()
 
+                .requestMatchers(HttpMethod.GET, "/excel/deposit").permitAll()
+                .requestMatchers(HttpMethod.GET, "/excel/deposit/{member-id}").permitAll()
+                .requestMatchers(HttpMethod.GET, "/excel/deposit/time").permitAll()
+
+                .requestMatchers(HttpMethod.GET, "/excel/use").permitAll()
+                .requestMatchers(HttpMethod.GET, "/excel/use/time").permitAll()
+
                 .anyRequest().authenticated();
 
         http
-                .apply(new FilterConfig(jwtTokenParser));
+                .apply(new FilterConfig(jwtTokenParser, objectMapper));
 
         return http.build();
     }
