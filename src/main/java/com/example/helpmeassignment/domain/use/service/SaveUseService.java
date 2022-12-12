@@ -1,6 +1,5 @@
 package com.example.helpmeassignment.domain.use.service;
 
-import com.example.helpmeassignment.domain.admin.facade.AdminFacade;
 import com.example.helpmeassignment.domain.deposit.presentation.dto.request.SaveDepositRequest;
 import com.example.helpmeassignment.domain.deposit.presentation.dto.response.TotalDepositAmountResponse;
 import com.example.helpmeassignment.domain.deposit.service.QueryTotalDepositAmountService;
@@ -20,7 +19,6 @@ public class SaveUseService {
     private final UseRepository useRepository;
     private final QueryTotalDepositAmountService queryTotalDepositAmountService;
     private final SaveDepositService saveDepositService;
-    private final AdminFacade adminFacade;
 
     @Transactional
     public void execute(SaveUseRequest request) {
