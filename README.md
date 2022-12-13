@@ -80,7 +80,7 @@ ERD는 `erd cloud` 툴을 활용하여 제작하였습니다.
 
 과제를 진행하며 마주한 문제들에 대해 기록합니다.
 
-### Excel 다운로드시 시간이 이상하게 저장되는 이슈
+#### Excel 다운로드시 시간이 이상하게 저장되는 이슈
 
 - 먼저, Excel을 다운로드하기 위해 `build.gradle`에`org.apache.poi:poi:5.2.2`과 `org.apache.poi:poi-ooxml:5.2.2` Excel 관련 의존성을 추가하였습니다.
 - 하지만 다운로드시 기간이 저장한 숫자와 다르게 저장되었습니다.
@@ -88,3 +88,12 @@ ERD는 `erd cloud` 툴을 활용하여 제작하였습니다.
 > 기간은 LocalDate 타입으로 저장되어 있습니다. Excel로 저장하려면 값을 String 타입으로 변환해야 합니다. 그때 강제형변환을 사용하면 값이 저장한 것과 다르게 출력된다는 것을 알 수 있었습니다.
 >
 > ➡️ 따라서 LocalDate의 내장함수를 이용해서 년,월,일을 각 각 구해 String 타입으로 합쳐 해결하였습니다.
+
+#### JPAQueryFactory에서 EntityManager를 인식하지 못하는 이슈
+
+- 먼저, Spring Boot 2.7.3에서는 `build.gradle`에 `com.querydsl:querydsl-jpa` Querydsl 관련 의존성을 추가하였습니다.
+- 하지만 Spring Boot 3.0.0에서는 해당 의존성이 적용되지 않았습니다.
+
+> Spring Boot 3.0.0에서 Querydsl을 사용하려면 `com.querydsl:querydsl-jpa:5.0.0:jakarta` 의존성을 추가해야 하는 것을 알 수 있었습니다.
+>
+> ➡️ 따라서 `build.gradle`에 `com.querydsl:querydsl-jpa`이 아닌 `com.querydsl:querydsl-jpa:5.0.0:jakarta` 의존성을 추가하여 해결하였였습니다.
